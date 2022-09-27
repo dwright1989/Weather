@@ -1,13 +1,28 @@
+
+
+let form = document.getElementById("searchForm");
+form.addEventListener('submit', (event) => {
+    event.preventDefault();
+    const local = form.location.value;
+    getWeatherInfo(local);
+});
+
 async function getWeatherInfo(local){
     const result = await fetch('http://api.openweathermap.org/data/2.5/weather?q='+local+'&APPID=383e8112eda58276db8733d5867dda8f',{
         mode: 'cors'
     });
-    const data = await result.json();
-    processData(data);
-    console.log("the data for: " + JSON.stringify(data));
+    let errorSpan = document.getElementById("error");
+    if (result.status === 404) {       
+        errorSpan.style.visibility = "visible";
+    } else {
+        const data = await result.json();
+        processData(data);
+        errorSpan.style.visibility = "hidden";
+    }
+    
 }
 
-getWeatherInfo("Kilmarnock");
+// default
 getWeatherInfo("London");
 
 function processData(data){

@@ -10,10 +10,11 @@
 <body>
     <div id="content">
         <div id="search">
-            <form>
-                <input type="search" id="searchBar">
+            <form id="searchForm">
+                <input type="search" id="searchBar" name="location">
                 <button type="submit">Search</button>
             </form>
+            <span id="error">Unable to find this location. Try again.</span>
         </div>
         <div id="weatherDisplay">
             <div id="location">The Location</div>

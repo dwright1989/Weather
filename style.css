@@ -12,7 +12,7 @@
 /* SEARCH */
 
 #search{
-    display: flex;
+    display: grid;
     justify-content: center;
 }
 
@@ -34,7 +34,7 @@ form{
     border: 1px solid black;
     border-radius: 5px;
     background-color: white;
-    margin: 5rem 0rem;
+    margin: 5rem 0rem 1rem 0rem
 }
 
 button[type="submit"] {
@@ -52,6 +52,11 @@ button[type="submit"] {
   
   button[type="submit"]:hover {
     opacity: 1;
+  }
+
+  #error{
+    visibility:hidden;
+      color: red;
   }
 
 /* WEATHER DISPLAY */
