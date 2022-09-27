@@ -4,12 +4,22 @@
 
 /* MAIN */
 
+:root{
+    --main-color: black;
+    --secondary-color: white;
+}
+
+input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 1000px var(--secondary-color) inset !important;
+}
+
 #content{
     min-height: 100vh;
-    background-color: black;
+    background-color: var(--main-color);
 }
 
 /* SEARCH */
+
 
 #search{
     display: grid;
@@ -31,9 +41,9 @@ form{
     color: #555;
     display: flex;
     padding: 2px;
-    border: 1px solid black;
+    border: 1px solid var(--main-color);
     border-radius: 5px;
-    background-color: white;
+    background-color: var(--secondary-color);
     margin: 5rem 0rem 1rem 0rem
 }
 
@@ -64,5 +74,5 @@ button[type="submit"] {
 #weatherDisplay{
     display: grid;
     margin: 3rem 8rem;
-    background-color: white;
+    background-color: var(--secondary-color);
 }
