@@ -1,0 +1,18 @@
+*{
+    margin: 0;
+}
+
+#content{
+    min-height: 100vh;
+    background-color: red;
+}
+
+#search{
+    background-color: blue;
+}
+
+#weatherDisplay{
+    display: grid;
+    margin: 8rem;
+    background-color: green;
+}
