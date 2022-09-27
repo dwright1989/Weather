@@ -31,6 +31,7 @@ function processData(data){
     const weatherData = {
         location : data.name,
         weather : data.weather[0].main,
+        icon: data.weather[0].icon,
         temperature : kelvinTemp - 273.15,
         feelsLike : kelvinFeelsLike - 273.15
     };
@@ -42,12 +43,15 @@ function processData(data){
 function displayData(data){
     let locationDiv = document.getElementById("location");
     let tempDiv = document.getElementById("temperature");
-    let weatherDiv = document.getElementById("weather");
+    let weatherTextDiv = document.getElementById("weatherText");
     let feelsLikeDiv = document.getElementById("feelsLike");
+
+    let weatherIcon = document.getElementById("weatherIcon");
+    weatherIcon.src = "http://openweathermap.org/img/wn/"+data.icon+"@2x.png";
 
     locationDiv.innerHTML = data.location;
     tempDiv.innerHTML = Math.trunc(data.temperature) + "&deg;C";
-    weatherDiv.innerHTML = data.weather;
+    weatherTextDiv.innerHTML = data.weather;
     feelsLikeDiv.innerHTML = "Feels like: " + Math.trunc(data.feelsLike) + "&deg;C";
 
 }

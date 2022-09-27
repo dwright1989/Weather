@@ -92,7 +92,7 @@ button[type="submit"] {
 
 #temperature{
     grid-area: temperature;
-    font-size: 4rem;
+    font-size: 8rem;
     justify-self: end;
     padding-right: 1rem;
 }
@@ -101,7 +101,12 @@ button[type="submit"] {
     grid-area: weather;
     align-self: end;
     padding-left: 1rem;
+    display: flex;
+    grid-template-columns: 2fr 1fr;
+    align-items: center;
 }
+
+
 
 #feelsLike{
     grid-area: feelsLike;
