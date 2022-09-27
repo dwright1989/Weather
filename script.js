@@ -16,16 +16,30 @@ async function getWeatherInfo(local){
         errorSpan.style.visibility = "visible";
     } else {
         const data = await result.json();
-        processData(data);
+        // get geomapping data for weekly forcast
+        let geoData = await fetch('http://api.openweathermap.org/geo/1.0/direct?q='+local+'&limit=5&appid=383e8112eda58276db8733d5867dda8f',{
+            mode: 'cors'
+        });
+        geoData = await geoData.json();
+        const lat = geoData[0].lat;
+        const lon = geoData[0].lon;
+        // get weekly data
+        let weeklyData = await fetch('http://api.openweathermap.org/data/2.5/forecast/?lat='+lat+'&lon='+lon+'&appid=383e8112eda58276db8733d5867dda8f',{
+            mode: 'cors'
+        });
+        weeklyData = await weeklyData.json();
+        processDailyData(data);
+        processWeeklyData(weeklyData);
         errorSpan.style.visibility = "hidden";
     }
+    
     
 }
 
 // default
 getWeatherInfo("London");
 
-function processData(data){
+function processDailyData(data){
     const kelvinTemp = data.main.temp;
     const kelvinFeelsLike = data.main.feels_like;
     const weatherData = {
@@ -35,9 +49,22 @@ function processData(data){
         temperature : kelvinTemp - 273.15,
         feelsLike : kelvinFeelsLike - 273.15
     };
-
     displayData(weatherData);
-    
+}
+
+function processWeeklyData(weeklyData){
+    console.log(JSON.stringify(weeklyData));
+    // Get todays date
+    // Set next four dates (midday time)
+    // for each date get the data
+    let time = weeklyData.list.find(x => x.dt=="1664431200");
+    console.log("time: "+ JSON.stringify(time.main.temp));
+}
+
+function getDateFromSeconds(seconds) {
+    var time = new Date(1970, 0, 1);
+    time.setSeconds(seconds);
+    return time;
 }
 
 function displayData(data){

@@ -81,9 +81,11 @@ button[type="submit"] {
     background-color: var(--secondary-color);
     grid-template-areas: "location location" 
                         "temperature weather" 
-                        "temperature feelsLike";
+                        "temperature feelsLike"
+                        "dailyWeekly dailyWeekly";
     padding-top: 2rem;
-    padding-bottom: 20rem; 
+    overflow:hidden; 
+    word-wrap:break-word;
 
 }
 
@@ -118,4 +120,12 @@ button[type="submit"] {
     padding-left: 1rem;
     padding-top: 0.3rem;
 
+}
+
+#dailyOrWeekly{
+    grid-area: dailyWeekly;
+    display: flex;
+    border: 1px solid black;
+    width: 90%;
+    margin: 3rem auto;
 }
