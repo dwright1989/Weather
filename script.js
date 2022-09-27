@@ -46,8 +46,8 @@ function displayData(data){
     let feelsLikeDiv = document.getElementById("feelsLike");
 
     locationDiv.innerHTML = data.location;
-    tempDiv.innerHTML = Math.trunc(data.temperature);
+    tempDiv.innerHTML = Math.trunc(data.temperature) + "&deg;C";
     weatherDiv.innerHTML = data.weather;
-    feelsLikeDiv.innerHTML = Math.trunc(data.feelsLike);
+    feelsLikeDiv.innerHTML = "Feels like: " + Math.trunc(data.feelsLike) + "&deg;C";
 
 }

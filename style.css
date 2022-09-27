@@ -1,5 +1,6 @@
 *{
     margin: 0;
+    font-family: arial, sans-serif;
 }
 
 /* MAIN */
@@ -73,6 +74,39 @@ button[type="submit"] {
 
 #weatherDisplay{
     display: grid;
-    margin: 3rem 8rem;
+    margin: 3rem auto;
+    width: 50%;
     background-color: var(--secondary-color);
+    grid-template-areas: "location location" 
+                        "temperature weather" 
+                        "temperature feelsLike";
+
+}
+
+#location{
+    grid-area: location;
+    text-align: center;
+    font-size: 2rem;
+    padding: 1rem;
+}
+
+#temperature{
+    grid-area: temperature;
+    font-size: 4rem;
+    justify-self: end;
+    padding-right: 1rem;
+}
+
+#weather{
+    grid-area: weather;
+    align-self: end;
+    padding-left: 1rem;
+}
+
+#feelsLike{
+    grid-area: feelsLike;
+    align-self: start;
+    padding-left: 1rem;
+    padding-top: 0.3rem;
+
 }
