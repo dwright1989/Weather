@@ -14,11 +14,25 @@ function processData(data){
     const kelvinTemp = data.main.temp;
     const kelvinFeelsLike = data.main.feels_like;
     const weatherData = {
+        location : data.name,
         weather : data.weather[0].main,
         temperature : kelvinTemp - 273.15,
         feelsLike : kelvinFeelsLike - 273.15
     };
 
-    console.log(weatherData);
+    displayData(weatherData);
     
+}
+
+function displayData(data){
+    let locationDiv = document.getElementById("location");
+    let tempDiv = document.getElementById("temperature");
+    let weatherDiv = document.getElementById("weather");
+    let feelsLikeDiv = document.getElementById("feelsLike");
+
+    locationDiv.innerHTML = data.location;
+    tempDiv.innerHTML = Math.trunc(data.temperature);
+    weatherDiv.innerHTML = data.weather;
+    feelsLikeDiv.innerHTML = Math.trunc(data.feelsLike);
+
 }
