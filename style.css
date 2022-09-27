@@ -17,6 +17,8 @@ input:-webkit-autofill {
 #content{
     min-height: 100vh;
     background-color: var(--main-color);
+    background-image: url('images/clear-sky.jpg');
+    background-size: cover;
 }
 
 /* SEARCH */
@@ -80,6 +82,8 @@ button[type="submit"] {
     grid-template-areas: "location location" 
                         "temperature weather" 
                         "temperature feelsLike";
+    padding-top: 2rem;
+    padding-bottom: 20rem; 
 
 }
 

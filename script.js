@@ -54,4 +54,32 @@ function displayData(data){
     weatherTextDiv.innerHTML = data.weather;
     feelsLikeDiv.innerHTML = "Feels like: " + Math.trunc(data.feelsLike) + "&deg;C";
 
+    setBackground(data.weather);
+
+}
+
+function setBackground(weather){
+    let backgroundURL = "clear-sky.jpg";
+    switch(weather) {
+        case "Clear":
+            backgroundURL = "clear-sky.jpg";
+            break;
+        case "Clouds":
+            backgroundURL = "clouds.jpg";
+            break;
+        case "Drizzle":
+        case "Rain":
+            backgroundURL = "rain.jpg";
+            break;
+        case "Snow":
+            backgroundURL = "snow.jpg";
+            break;
+        case "Thunderstorm":
+            backgroundURL = "thunder.jpg";
+            break;
+      }
+
+    let content = document.getElementById("content");
+    backgroundURL = "images/"+backgroundURL;
+    content.style.backgroundImage = "url("+backgroundURL+")";
 }
