@@ -28,8 +28,11 @@ async function getWeatherInfo(local){
             mode: 'cors'
         });
         weeklyData = await weeklyData.json();
+
+        
         processDailyData(data);
         processWeeklyData(weeklyData);
+        processHourlyData(weeklyData);
         errorSpan.style.visibility = "hidden";
     }
     
@@ -45,7 +48,6 @@ function processDailyData(data){
 }
 
 function createWeatherObject(data, date){
-    console.log(JSON.stringify(data));
     const day = date.getDay();
     let dayOfTheWeek = "";
     switch(day) {
@@ -80,7 +82,8 @@ function createWeatherObject(data, date){
         icon: data.weather[0].icon,
         temperature : Math.trunc(kelvinTemp - 273.15),
         feelsLike : Math.trunc(kelvinFeelsLike - 273.15),
-        day: dayOfTheWeek
+        day: dayOfTheWeek,
+        time: date.getTime()
     };
     return weatherData;
 
@@ -103,6 +106,49 @@ function processWeeklyData(weeklyData){
         eval('day'+i+'WeatherDiv.innerHTML=day'+i+'Weather.weather;');
         eval('day'+i+'DayDiv=day'+i+'Div.querySelector(".dayOfTheWeek");');
         eval('day'+i+'DayDiv.innerHTML=day'+i+'Weather.day;');
+    }
+
+}
+
+function processHourlyData(weeklyData){
+    let hourlyTableDiv = document.getElementById("hourlyTable");
+    // may need to reset *************************************
+    let hourlyData = document.createElement("div");
+    hourlyData.id = "hourlyData";
+    
+    // loop for 10 hours
+    let i=0;
+    for (const data of weeklyData.list) {
+        console.log(JSON.stringify(data));
+        if(i<10){
+             // Create DOM objects for each hour
+            let weatherObject = createWeatherObject(data, new Date());
+            let hourlyTimeData = document.createElement("div");
+            hourlyTimeData.classList.add("hourlyTimeData");
+            hourlyTimeData.innerHTML = weatherObject.time;
+
+            let hourlyTempData = document.createElement("div");
+            hourlyTempData.classList.add("hourlyTempData");
+            hourlyTempData.innerHTML = weatherObject.temperature;
+
+            let hourlyWeatherData = document.createElement("div");
+            hourlyWeatherData.classList.add("hourlyWeatherData");
+            let hourlyWeatherTitle = document.createElement("div");
+            hourlyWeatherTitle.classList.add("hourlyWeatherTitle");
+            hourlyWeatherTitle.innerHTML = weatherObject.weather;
+            let hourlyWeatherIcon = document.createElement("img");
+            hourlyWeatherIcon.classList.add("hourlyWeatherIcon");
+            hourlyWeatherIcon.src = "http://openweathermap.org/img/wn/"+weatherObject.icon+"@2x.png";
+            hourlyWeatherData.appendChild(hourlyWeatherTitle);
+            hourlyWeatherData.appendChild(hourlyWeatherIcon);
+
+
+            hourlyData.appendChild(hourlyTimeData);
+            hourlyData.appendChild(hourlyTempData);
+            hourlyData.appendChild(hourlyWeatherData);
+            hourlyTableDiv.appendChild(hourlyData);
+        }
+        i++;
     }
 
 }

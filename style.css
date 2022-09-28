@@ -3,7 +3,9 @@
     font-family: arial, sans-serif;
 }
 
-/* MAIN */
+/* 
+MAIN 
+*/
 
 :root{
     --main-color: black;
@@ -16,12 +18,15 @@ input:-webkit-autofill {
 
 #content{
     min-height: 100vh;
+    height: 100%;
     background-color: var(--main-color);
     background-image: url('images/clear-sky.jpg');
     background-size: cover;
 }
 
-/* SEARCH */
+/* 
+SEARCH
+ */
 
 
 #search{
@@ -72,7 +77,9 @@ button[type="submit"] {
       color: red;
   }
 
-/* WEATHER DISPLAY */
+/* 
+WEATHER DISPLAY 
+*/
 
 #weatherDisplay{
     display: grid;
@@ -82,7 +89,8 @@ button[type="submit"] {
     grid-template-areas: "location location" 
                         "temperature weather" 
                         "temperature feelsLike"
-                        "dailyHourly dailyHourly";
+                        "dailyHourly dailyHourly"
+                        "hourlyView hourlyView";
     padding-top: 2rem;
     overflow:hidden; 
     word-wrap:break-word;
@@ -122,6 +130,12 @@ button[type="submit"] {
 
 }
 
+
+
+/*
+DAILY VIEW
+*/
+
 #dailyView{
     grid-area: dailyHourly;
     display: grid;
@@ -130,9 +144,6 @@ button[type="submit"] {
     margin: 3rem auto;
 }
 
-/*
-DAILY VIEW
-*/
 
 #dailyWeatherHeading{
     grid-area: 1/1/2/6;
@@ -165,4 +176,67 @@ DAILY VIEW
 .dayOfTheWeek{
     grid-area:3/1/4/3;
     text-align: center;
+}
+
+/*
+HOURLY VIEW
+*/
+#hourlyView{
+    grid-area: hourlyView;
+    background-color: #eff7fa;
+    width: 90%;
+    margin: auto;
+    padding-top: 3rem;
+}
+
+
+#hourlyTable{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    padding: 0rem 2rem;
+
+}
+
+#hourlyData{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-area:3/1/4/4;
+}
+
+#hourlyWeatherHeading{
+    text-align: center;
+    padding-bottom: 2rem;
+}
+
+#hourlyTime{
+    justify-self: center;
+
+}
+
+#hourlyTemperature{
+    justify-self: center;
+
+}
+
+#hourlyWeather{
+
+    justify-self: center;
+
+}
+
+.hourlyTimeData{
+    grid-column-start: 1;
+    grid-column-end: 2;
+}
+
+.hourlyTempData{
+    grid-column-start: 2;
+    grid-column-end: 3;
+}
+
+.hourlyWeatherData{
+    grid-column-start: 3;
+    grid-column-end: 4;
+    display: flex;
+    align-items: center;
 }
