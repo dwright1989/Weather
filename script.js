@@ -183,9 +183,9 @@ function displayData(data){
     weatherIcon.src = "http://openweathermap.org/img/wn/"+data.icon+"@2x.png";
 
     locationDiv.innerHTML = data.location;
-    tempDiv.innerHTML = data.temperature + "&deg;C";
+    tempDiv.innerHTML = +data.temperature + "&deg;C";
     weatherTextDiv.innerHTML = data.weather;
-    feelsLikeDiv.innerHTML = "Feels like: " + data.feelsLike + "&deg;C";
+    feelsLikeDiv.innerHTML = "Feels like: <span class='color1'>" + data.feelsLike + "&deg;C</span>";
 
     setBackground(data.weather);
 
