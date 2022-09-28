@@ -8,7 +8,7 @@ form.addEventListener('submit', (event) => {
 });
 
 async function getWeatherInfo(local){
-    const result = await fetch('http://api.openweathermap.org/data/2.5/weather?q='+local+'&APPID=383e8112eda58276db8733d5867dda8f',{
+    const result = await fetch('https://api.openweathermap.org/data/2.5/weather?q='+local+'&APPID=383e8112eda58276db8733d5867dda8f',{
         mode: 'cors'
     });
     let errorSpan = document.getElementById("error");
