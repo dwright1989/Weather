@@ -23,6 +23,7 @@ input:-webkit-autofill {
 }
 
 #content{
+    min-width: 500px;
     min-height: 100vh;
     height: 100%;
     background-color: var(--main-color);
@@ -93,6 +94,7 @@ WEATHER DISPLAY
 #weatherDisplay{
     display: grid;
     margin: 3rem auto;
+    min-width: 500px;
     width: 50%;
     background-color: var(--secondary-color);
     grid-template-areas: "location location" 
