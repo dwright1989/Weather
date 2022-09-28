@@ -45,6 +45,7 @@ function processDailyData(data){
 }
 
 function createWeatherObject(data, date){
+    console.log(JSON.stringify(data));
     const day = date.getDay();
     let dayOfTheWeek = "";
     switch(day) {
@@ -89,66 +90,20 @@ function createWeatherObject(data, date){
 TODO - TIDY DUPLICATE CODE
 */
 function processWeeklyData(weeklyData){
-    // Set next five dates (midday time)
-    let day1 = new Date();
-    day1.setDate(day1.getDate() + 1);
-    day1.setHours(13,00,00);
-    let day2 = new Date();
-    day2.setDate(day2.getDate() + 2);
-    day2.setHours(13,00,00);
-    let day3 = new Date();
-    day3.setDate(day3.getDate() + 3);
-    day3.setHours(13,00,00);
-    let day4 = new Date();
-    day4.setDate(day4.getDate() + 4);
-    day4.setHours(13,00,00);
-    let day5 = new Date();
-    day5.setDate(day5.getDate() + 1);
-    day5.setHours(13,00,00);
-    // for each date get the data
-    let day1Data = weeklyData.list.find(x => x.dt==Math.floor(day1/1000));
-    let day2Data = weeklyData.list.find(x => x.dt==Math.floor(day2/1000));
-    let day3Data = weeklyData.list.find(x => x.dt==Math.floor(day3/1000));
-    let day4Data = weeklyData.list.find(x => x.dt==Math.floor(day4/1000));
-    let day5Data = weeklyData.list.find(x => x.dt==Math.floor(day5/1000));
-
-    let day1Div = document.getElementById("day1");
-    let day2Div = document.getElementById("day2");
-    let day3Div = document.getElementById("day3");
-    let day4Div = document.getElementById("day4");
-    let day5Div = document.getElementById("day5");
-
-    let day1TempDiv = day1Div.querySelector('.temperatureDaily');
-    let day2TempDiv = day2Div.querySelector('.temperatureDaily');
-    let day3TempDiv = day3Div.querySelector('.temperatureDaily');
-    let day4TempDiv = day4Div.querySelector('.temperatureDaily');
-    let day5TempDiv = day5Div.querySelector('.temperatureDaily');
-
-    let day1Weather = createWeatherObject(day1Data, day1);
-    let day2Weather = createWeatherObject(day2Data, day2);
-    let day3Weather = createWeatherObject(day3Data, day3);
-    let day4Weather = createWeatherObject(day4Data, day4);
-    let day5Weather = createWeatherObject(day5Data, day5);
-
-    day1TempDiv.innerHTML = day1Weather.temperature + "&deg;C";
-    day2TempDiv.innerHTML = day2Weather.temperature + "&deg;C";
-    day3TempDiv.innerHTML = day3Weather.temperature + "&deg;C";
-    day4TempDiv.innerHTML = day4Weather.temperature + "&deg;C";
-    day5TempDiv.innerHTML = day5Weather.temperature + "&deg;C";
-
-    let day1DayDiv = day1Div.querySelector('.dayOfTheWeek');
-    let day2DayDiv = day2Div.querySelector('.dayOfTheWeek');
-    let day3DayDiv = day3Div.querySelector('.dayOfTheWeek');
-    let day4DayDiv = day4Div.querySelector('.dayOfTheWeek');
-    let day5DayDiv = day5Div.querySelector('.dayOfTheWeek');
-
-    day1DayDiv.innerHTML = day1Weather.day;
-    day2DayDiv.innerHTML = day2Weather.day;
-    day3DayDiv.innerHTML = day3Weather.day;
-    day4DayDiv.innerHTML = day4Weather.day;
-    day5DayDiv.innerHTML = day5Weather.day;
-
-
+    console.log("weekly data: " + JSON.stringify(weeklyData));
+    // For loop to create data for the next 4 days
+    for(let i=1; i<=4; i++){
+        eval('day' + i + "=" + "new Date()" +';');
+        eval('day'+i+'.setDate(day'+i+'.getDate() +'+i+');');
+        eval('day'+i+'.setHours(13,00,00);');
+        eval('day'+i+'Data=weeklyData.list.find(x=>x.dt==Math.floor(day'+i+'/1000));');
+        eval('day'+i+'Weather=createWeatherObject(day'+i+'Data, day'+i+');');
+        eval('day'+i+'Div=document.getElementById("day'+i+'");');
+        eval('day'+i+'TempDiv=day'+i+'Div.querySelector(".temperatureDaily");');
+        eval('day'+i+'TempDiv.innerHTML=day'+i+'Weather.temperature+"&deg;C";');
+        eval('day'+i+'DayDiv=day'+i+'Div.querySelector(".dayOfTheWeek");');
+        eval('day'+i+'DayDiv.innerHTML=day'+i+'Weather.day;');
+    }
 
 }
 
