@@ -125,9 +125,7 @@ button[type="submit"] {
 #dailyView{
     grid-area: dailyHourly;
     display: grid;
-    /*grid-template-rows: 1fr 2fr 2fr;*/
     grid-template-columns: repeat(4, 1fr);
-    border: 1px solid black;
     width: 90%;
     margin: 3rem auto;
 }
@@ -144,4 +142,27 @@ DAILY VIEW
 .dayView{
     display:grid;
     justify-self: center;
+}
+
+.temperatureDaily{
+    grid-area: 1/1/2/3;
+    font-size: 2rem;
+    text-align: center;
+    align-self:center;
+}
+
+.iconDaily{
+    grid-area:2/1/2/2;
+    width: 4rem;
+    height: auto;
+}
+
+.weatherDaily{
+    grid-area:2/2/2/3;
+    align-self: center;
+}
+
+.dayOfTheWeek{
+    grid-area:3/1/4/3;
+    text-align: center;
 }
