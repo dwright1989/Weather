@@ -82,7 +82,7 @@ button[type="submit"] {
     grid-template-areas: "location location" 
                         "temperature weather" 
                         "temperature feelsLike"
-                        "dailyWeekly dailyWeekly";
+                        "dailyHourly dailyHourly";
     padding-top: 2rem;
     overflow:hidden; 
     word-wrap:break-word;
@@ -122,10 +122,26 @@ button[type="submit"] {
 
 }
 
-#dailyOrWeekly{
-    grid-area: dailyWeekly;
-    display: flex;
+#dailyOrHourly{
+    grid-area: dailyHourly;
+    display: grid;
+    /*grid-template-rows: 1fr 2fr 2fr;*/
+    grid-template-columns: repeat(5, 1fr);
     border: 1px solid black;
     width: 90%;
     margin: 3rem auto;
+}
+
+/*
+DAILY VIEW
+*/
+
+#dailyWeatherHeading{
+    grid-area: 1/1/2/6;
+    justify-self: center;
+    padding: 2rem 0rem 4rem 0rem;
+}
+.dayView{
+    display:grid;
+    justify-self: center;
 }

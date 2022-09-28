@@ -40,25 +40,116 @@ async function getWeatherInfo(local){
 getWeatherInfo("London");
 
 function processDailyData(data){
+    let weatherData = createWeatherObject(data, new Date());
+    displayData(weatherData);
+}
+
+function createWeatherObject(data, date){
+    const day = date.getDay();
+    let dayOfTheWeek = "";
+    switch(day) {
+        case 0:
+            dayOfTheWeek = "Sunday";
+            break;
+        case 1:
+            dayOfTheWeek = "Monday";
+            break;
+        case 2:
+            dayOfTheWeek = "Tuesday";
+            break;
+        case 3:
+            dayOfTheWeek = "Wednesday";
+            break;
+        case 4:
+            dayOfTheWeek = "Thursday";
+            break;
+        case 5:
+            dayOfTheWeek = "Friday";
+            break;
+        case 6:
+            dayOfTheWeek = "Saturday";
+            break;
+    }
+
     const kelvinTemp = data.main.temp;
     const kelvinFeelsLike = data.main.feels_like;
     const weatherData = {
         location : data.name,
         weather : data.weather[0].main,
         icon: data.weather[0].icon,
-        temperature : kelvinTemp - 273.15,
-        feelsLike : kelvinFeelsLike - 273.15
+        temperature : Math.trunc(kelvinTemp - 273.15),
+        feelsLike : Math.trunc(kelvinFeelsLike - 273.15),
+        day: dayOfTheWeek
     };
-    displayData(weatherData);
+    return weatherData;
+
 }
 
+/*
+TODO - TIDY DUPLICATE CODE
+*/
 function processWeeklyData(weeklyData){
-    console.log(JSON.stringify(weeklyData));
-    // Get todays date
-    // Set next four dates (midday time)
+    // Set next five dates (midday time)
+    let day1 = new Date();
+    day1.setDate(day1.getDate() + 1);
+    day1.setHours(13,00,00);
+    let day2 = new Date();
+    day2.setDate(day2.getDate() + 2);
+    day2.setHours(13,00,00);
+    let day3 = new Date();
+    day3.setDate(day3.getDate() + 3);
+    day3.setHours(13,00,00);
+    let day4 = new Date();
+    day4.setDate(day4.getDate() + 4);
+    day4.setHours(13,00,00);
+    let day5 = new Date();
+    day5.setDate(day5.getDate() + 1);
+    day5.setHours(13,00,00);
     // for each date get the data
-    let time = weeklyData.list.find(x => x.dt=="1664431200");
-    console.log("time: "+ JSON.stringify(time.main.temp));
+    let day1Data = weeklyData.list.find(x => x.dt==Math.floor(day1/1000));
+    let day2Data = weeklyData.list.find(x => x.dt==Math.floor(day2/1000));
+    let day3Data = weeklyData.list.find(x => x.dt==Math.floor(day3/1000));
+    let day4Data = weeklyData.list.find(x => x.dt==Math.floor(day4/1000));
+    let day5Data = weeklyData.list.find(x => x.dt==Math.floor(day5/1000));
+
+    let day1Div = document.getElementById("day1");
+    let day2Div = document.getElementById("day2");
+    let day3Div = document.getElementById("day3");
+    let day4Div = document.getElementById("day4");
+    let day5Div = document.getElementById("day5");
+
+    let day1TempDiv = day1Div.querySelector('.temperatureDaily');
+    let day2TempDiv = day2Div.querySelector('.temperatureDaily');
+    let day3TempDiv = day3Div.querySelector('.temperatureDaily');
+    let day4TempDiv = day4Div.querySelector('.temperatureDaily');
+    let day5TempDiv = day5Div.querySelector('.temperatureDaily');
+
+    let day1Weather = createWeatherObject(day1Data, day1);
+    let day2Weather = createWeatherObject(day2Data, day2);
+    let day3Weather = createWeatherObject(day3Data, day3);
+    let day4Weather = createWeatherObject(day4Data, day4);
+    let day5Weather = createWeatherObject(day5Data, day5);
+
+    day1TempDiv.innerHTML = day1Weather.temperature + "&deg;C";
+    day2TempDiv.innerHTML = day2Weather.temperature + "&deg;C";
+    day3TempDiv.innerHTML = day3Weather.temperature + "&deg;C";
+    day4TempDiv.innerHTML = day4Weather.temperature + "&deg;C";
+    day5TempDiv.innerHTML = day5Weather.temperature + "&deg;C";
+
+    let day1DayDiv = day1Div.querySelector('.dayOfTheWeek');
+    let day2DayDiv = day2Div.querySelector('.dayOfTheWeek');
+    let day3DayDiv = day3Div.querySelector('.dayOfTheWeek');
+    let day4DayDiv = day4Div.querySelector('.dayOfTheWeek');
+    let day5DayDiv = day5Div.querySelector('.dayOfTheWeek');
+
+    day1DayDiv.innerHTML = day1Weather.day;
+    day2DayDiv.innerHTML = day2Weather.day;
+    day3DayDiv.innerHTML = day3Weather.day;
+    day4DayDiv.innerHTML = day4Weather.day;
+    day5DayDiv.innerHTML = day5Weather.day;
+
+
+
 }
 
 function getDateFromSeconds(seconds) {
@@ -77,9 +168,9 @@ function displayData(data){
     weatherIcon.src = "http://openweathermap.org/img/wn/"+data.icon+"@2x.png";
 
     locationDiv.innerHTML = data.location;
-    tempDiv.innerHTML = Math.trunc(data.temperature) + "&deg;C";
+    tempDiv.innerHTML = data.temperature + "&deg;C";
     weatherTextDiv.innerHTML = data.weather;
-    feelsLikeDiv.innerHTML = "Feels like: " + Math.trunc(data.feelsLike) + "&deg;C";
+    feelsLikeDiv.innerHTML = "Feels like: " + data.feelsLike + "&deg;C";
 
     setBackground(data.weather);
 
