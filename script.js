@@ -17,14 +17,14 @@ async function getWeatherInfo(local){
     } else {
         const data = await result.json();
         // get geomapping data for weekly forcast
-        let geoData = await fetch('http://api.openweathermap.org/geo/1.0/direct?q='+local+'&limit=5&appid=383e8112eda58276db8733d5867dda8f',{
+        let geoData = await fetch('https://api.openweathermap.org/geo/1.0/direct?q='+local+'&limit=5&appid=383e8112eda58276db8733d5867dda8f',{
             mode: 'cors'
         });
         geoData = await geoData.json();
         const lat = geoData[0].lat;
         const lon = geoData[0].lon;
         // get weekly data
-        let weeklyData = await fetch('http://api.openweathermap.org/data/2.5/forecast/?lat='+lat+'&lon='+lon+'&appid=383e8112eda58276db8733d5867dda8f',{
+        let weeklyData = await fetch('https://api.openweathermap.org/data/2.5/forecast/?lat='+lat+'&lon='+lon+'&appid=383e8112eda58276db8733d5867dda8f',{
             mode: 'cors'
         });
         weeklyData = await weeklyData.json();
@@ -101,7 +101,7 @@ function processWeeklyData(weeklyData){
         eval('day'+i+'TempDiv=day'+i+'Div.querySelector(".temperatureDaily");');
         eval('day'+i+'TempDiv.innerHTML=day'+i+'Weather.temperature+"&deg;C";');
         eval('day'+i+'IconDiv=day'+i+'Div.querySelector(".iconDaily");');
-        eval('day'+i+'IconDiv.src="http://openweathermap.org/img/wn/"+day'+i+'Weather.icon+"@2x.png";');
+        eval('day'+i+'IconDiv.src="https://openweathermap.org/img/wn/"+day'+i+'Weather.icon+"@2x.png";');
         eval('day'+i+'WeatherDiv=day'+i+'Div.querySelector(".weatherDaily");');
         eval('day'+i+'WeatherDiv.innerHTML=day'+i+'Weather.weather;');
         eval('day'+i+'DayDiv=day'+i+'Div.querySelector(".dayOfTheWeek");');
@@ -152,7 +152,7 @@ function processHourlyData(weeklyData){
             hourlyWeatherTitle.innerHTML = weatherObject.weather;
             let hourlyWeatherIcon = document.createElement("img");
             hourlyWeatherIcon.classList.add("hourlyWeatherIcon");
-            hourlyWeatherIcon.src = "http://openweathermap.org/img/wn/"+weatherObject.icon+"@2x.png";
+            hourlyWeatherIcon.src = "https://openweathermap.org/img/wn/"+weatherObject.icon+"@2x.png";
             hourlyWeatherData.appendChild(hourlyWeatherTitle);
             hourlyWeatherData.appendChild(hourlyWeatherIcon);
 
@@ -180,7 +180,7 @@ function displayData(data){
     let feelsLikeDiv = document.getElementById("feelsLike");
 
     let weatherIcon = document.getElementById("weatherIcon");
-    weatherIcon.src = "http://openweathermap.org/img/wn/"+data.icon+"@2x.png";
+    weatherIcon.src = "https://openweathermap.org/img/wn/"+data.icon+"@2x.png";
 
     locationDiv.innerHTML = data.location;
     tempDiv.innerHTML = +data.temperature + "&deg;C";
