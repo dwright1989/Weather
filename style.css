@@ -208,20 +208,12 @@ HOURLY VIEW
     padding-bottom: 2rem;
 }
 
-#hourlyTime{
+.center{
     justify-self: center;
-
 }
 
-#hourlyTemperature{
-    justify-self: center;
-
-}
-
-#hourlyWeather{
-
-    justify-self: center;
-
+.align-center{
+    align-self: center;
 }
 
 .hourlyTimeData{

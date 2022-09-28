@@ -83,7 +83,7 @@ function createWeatherObject(data, date){
         temperature : Math.trunc(kelvinTemp - 273.15),
         feelsLike : Math.trunc(kelvinFeelsLike - 273.15),
         day: dayOfTheWeek,
-        time: date.getTime()
+        time: data.dt
     };
     return weatherData;
 
@@ -113,26 +113,40 @@ function processWeeklyData(weeklyData){
 function processHourlyData(weeklyData){
     let hourlyTableDiv = document.getElementById("hourlyTable");
     // may need to reset *************************************
-    let hourlyData = document.createElement("div");
-    hourlyData.id = "hourlyData";
+    let hourlyData = document.getElementById("hourlyData");
+    if(hourlyData==null || hourlyData==""){
+        hourlyData = document.createElement("div");
+        hourlyData.id = "hourlyData";
+    }else{
+        hourlyData.innerHTML = "";
+    }
     
     // loop for 10 hours
     let i=0;
     for (const data of weeklyData.list) {
-        console.log(JSON.stringify(data));
         if(i<10){
              // Create DOM objects for each hour
             let weatherObject = createWeatherObject(data, new Date());
             let hourlyTimeData = document.createElement("div");
             hourlyTimeData.classList.add("hourlyTimeData");
-            hourlyTimeData.innerHTML = weatherObject.time;
+            hourlyTimeData.classList.add("center");
+            hourlyTimeData.classList.add("align-center");
+            let time = weatherObject.time;
+            var date = new Date(0);
+            date.setSeconds(time);
+            var timeString = date.toISOString().substring(11, 16);
+            hourlyTimeData.innerHTML = timeString;
 
             let hourlyTempData = document.createElement("div");
             hourlyTempData.classList.add("hourlyTempData");
-            hourlyTempData.innerHTML = weatherObject.temperature;
+            hourlyTempData.classList.add("center");
+            hourlyTempData.classList.add("align-center");
+            hourlyTempData.innerHTML = weatherObject.temperature + "&deg;C";
 
             let hourlyWeatherData = document.createElement("div");
             hourlyWeatherData.classList.add("hourlyWeatherData");
+            hourlyWeatherData.classList.add("center");
+            hourlyWeatherData.classList.add("align-center");
             let hourlyWeatherTitle = document.createElement("div");
             hourlyWeatherTitle.classList.add("hourlyWeatherTitle");
             hourlyWeatherTitle.innerHTML = weatherObject.weather;
