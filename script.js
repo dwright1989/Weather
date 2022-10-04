@@ -92,20 +92,6 @@ function createWeatherObject(data, date){
 function processWeeklyData(weeklyData){
     // For loop to create data for the next 4 days
     for(let i=1; i<=4; i++){
-       /* eval('day' + i + "=" + "new Date()" +';');
-        eval('day'+i+'.setDate(day'+i+'.getDate() +'+i+');');
-        eval('day'+i+'.setHours(13,00,00);');
-        eval('day'+i+'Data=weeklyData.list.find(x=>x.dt==Math.floor(day'+i+'/1000));');
-        eval('day'+i+'Weather=createWeatherObject(day'+i+'Data, day'+i+');');
-        eval('day'+i+'Div=document.getElementById("day'+i+'");');
-        eval('day'+i+'TempDiv=day'+i+'Div.querySelector(".temperatureDaily");');
-        eval('day'+i+'TempDiv.innerHTML=day'+i+'Weather.temperature+"&deg;C";');
-        eval('day'+i+'IconDiv=day'+i+'Div.querySelector(".iconDaily");');
-        eval('day'+i+'IconDiv.src="https://openweathermap.org/img/wn/"+day'+i+'Weather.icon+"@2x.png";');
-        eval('day'+i+'WeatherDiv=day'+i+'Div.querySelector(".weatherDaily");');
-        eval('day'+i+'WeatherDiv.innerHTML=day'+i+'Weather.weather;');
-        eval('day'+i+'DayDiv=day'+i+'Div.querySelector(".dayOfTheWeek");');
-        eval('day'+i+'DayDiv.innerHTML=day'+i+'Weather.day;');*/
         const day = new Date();
         day.setDate(day.getDate()+i);
         day.setHours(13,00,00);
