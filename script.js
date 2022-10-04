@@ -92,7 +92,7 @@ function createWeatherObject(data, date){
 function processWeeklyData(weeklyData){
     // For loop to create data for the next 4 days
     for(let i=1; i<=4; i++){
-        eval('day' + i + "=" + "new Date()" +';');
+       /* eval('day' + i + "=" + "new Date()" +';');
         eval('day'+i+'.setDate(day'+i+'.getDate() +'+i+');');
         eval('day'+i+'.setHours(13,00,00);');
         eval('day'+i+'Data=weeklyData.list.find(x=>x.dt==Math.floor(day'+i+'/1000));');
@@ -105,7 +105,21 @@ function processWeeklyData(weeklyData){
         eval('day'+i+'WeatherDiv=day'+i+'Div.querySelector(".weatherDaily");');
         eval('day'+i+'WeatherDiv.innerHTML=day'+i+'Weather.weather;');
         eval('day'+i+'DayDiv=day'+i+'Div.querySelector(".dayOfTheWeek");');
-        eval('day'+i+'DayDiv.innerHTML=day'+i+'Weather.day;');
+        eval('day'+i+'DayDiv.innerHTML=day'+i+'Weather.day;');*/
+        const day = new Date();
+        day.setDate(day.getDate()+i);
+        day.setHours(13,00,00);
+        const dayData = weeklyData.list.find(x=>x.dt = Math.floor(day/1000));
+        const dayWeather = createWeatherObject(dayData,day);
+        const dayDiv = document.getElementById(`day${i}`);
+        const dayTempDiv = dayDiv.querySelector(".temperatureDaily");
+        dayTempDiv.innerHTML = dayWeather.temperature+'&deg;C';
+        const dayIconDiv = dayDiv.querySelector(".iconDaily");
+        dayIconDiv.src = `https://openweathermap.org/img/wn/${dayWeather.icon}@2x.png`;
+        const dayWeatherDiv = dayDiv.querySelector(".weatherDaily");
+        dayWeatherDiv.textContent = dayWeather.weather;
+        const dayDayDiv = dayDiv.querySelector(".dayOfTheWeek");
+        dayDayDiv.textContent = dayWeather.day;
     }
 
 }
